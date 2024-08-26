@@ -1,3 +1,5 @@
+veracode_image:
+  imageName : veracode/scm-packaging:2.1.0
 veracode_static_scan:
   push:
     trigger: true

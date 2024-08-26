@@ -5,7 +5,7 @@
 You could use this example app as a base for your new project or as a guide to
 Dockerize your existing Rails app.fdfs hsdbksdj jndfbfjdsfn test
 msdnmsnd test22 test33 test44 test 55 test6 test5 test3 test66 test377 testy778
-test88 tetsgg tttt test66788
+test88 tetsgg tttt test66788 testbknbk
 
 The example app is minimal but it wires up a number of things you might use in
 a real world Rails app, but at the same time it's not loaded up with a million

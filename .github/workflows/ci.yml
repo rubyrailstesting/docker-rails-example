@@ -24,7 +24,10 @@ jobs:
           mv veracode-cli_2.23.0_linux_x86 cli
           mkdir veracode-artifacts
           docker build -t local .
-          docker run -v $(pwd):/files local sh ./test.sh
+          cd test
+          docker build -t test .
+          cd ../
+          docker run -v $(pwd):/files test sh ./test.sh
       - name: Run YAML to Github Output Action
         id: yaml-output
         uses: christian-ci/action-yaml-github-output@v2

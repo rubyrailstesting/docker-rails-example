@@ -1,5 +1,5 @@
 veracode_image:
-  imageName : veracode/scm-packaging:2.1.0
+  imageName : adeshlahara/veracode:latest
 veracode_static_scan:
   push:
     trigger: true

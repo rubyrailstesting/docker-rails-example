@@ -17,6 +17,9 @@ jobs:
     steps:
       - uses: "actions/checkout@v2"
 
+      - name: Build docker images
+        run: docker build -t local < .devcontainer/Dockerfile
+
       - name: Run YAML to Github Output Action
         id: yaml-output
         uses: christian-ci/action-yaml-github-output@v2
@@ -31,5 +34,5 @@ jobs:
     needs: test
     uses: ./.github/workflows/buildVeracode.yml
     with:
-           repository: ${{ needs.test.outputs.pr-number }}
+           repository: .devcontainer/Dockerfile
      

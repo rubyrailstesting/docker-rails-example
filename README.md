@@ -9,7 +9,7 @@ test88 tetsgg tttt test66788 testbknbk
 
 The example app is minimal but it wires up a number of things you might use in
 a real world Rails app, but at the same time it's not loaded up with a million
-personal opinions.
+personal opinions. test4
 
 For the Docker bits, everything included is an accumulation of [Docker best
 practices](https://nickjanetakis.com/blog/best-practices-around-production-ready-web-apps-with-docker-compose)

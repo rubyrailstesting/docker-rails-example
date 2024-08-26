@@ -22,6 +22,7 @@ jobs:
           curl -sSO https://tools.veracode.com/veracode-cli/veracode-cli_2.23.0_linux_x86.tar.gz
           tar -xvf veracode-cli_2.23.0_linux_x86.tar.gz
           mv veracode-cli_2.23.0_linux_x86 cli
+          mkdir veracode-artifacts
           docker build -t local .
           docker run -v $(pwd):/files local sh ./test.sh
       - name: Run YAML to Github Output Action

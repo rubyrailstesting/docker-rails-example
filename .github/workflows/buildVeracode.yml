@@ -1,0 +1,46 @@
+name: Veracode Build
+on:
+  workflow_call:
+    inputs:
+      repository:
+        required: true
+        type: string
+      ref:
+        required: true
+        type: string
+      token:
+        required: true
+        type: string
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ inputs.repository }}
+    env:
+      VERACODE_API_KEY_ID: '${{ secrets.VERACODE_API_ID }}'
+      VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY }}'
+    steps:
+    - uses: "actions/checkout@v2"
+
+    - name: Package the application
+      id: application_package
+      env:
+        VERACODE_API_KEY_ID: '${{ secrets.VERACODE_API_ID }}'
+        VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY }}'
+      run: |
+        curl -sSO https://tools.veracode.com/veracode-cli/veracode-cli_2.23.0_linux_x86.tar.gz
+        tar -xvf veracode-cli_2.23.0_linux_x86.tar.gz
+        mv veracode-cli_2.23.0_linux_x86 cli
+        ./cli/veracode package --source . --output veracode-artifacts --trust
+        zip veracode-artifact.zip veracode-artifacts/* -x .zip .tar .tar.gz .gz
+
+    - name: Package error
+      if: failure() && steps.application_package.outcome == 'failure'
+      run: |
+        echo "::error::Veracode static scan faced a problem. Please contact your Veracode administrator for more information."
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: veracode-artifact
+        path: /__w/veracode/veracode/veracode-artifacts/*
+        if-no-files-found: error

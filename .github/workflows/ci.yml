@@ -18,7 +18,7 @@ jobs:
       - uses: "actions/checkout@v2"
 
       - name: Build docker images
-        run: docker build -t local
+        run: docker build -t local .
 
       - name: Run YAML to Github Output Action
         id: yaml-output

@@ -28,7 +28,7 @@ jobs:
           echo "Cluster Name: ${{ steps.yaml-output.outputs.imageName }}"
 
       - name: Print Variables
-        uses: ./buildVeracode.yml
+        uses: ./.github/workflows/buildVeracode.yml
         with:
            repository: ${{ steps.yaml-output.outputs.imageName }}
      

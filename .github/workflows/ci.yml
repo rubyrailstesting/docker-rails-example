@@ -12,7 +12,8 @@ on:
 jobs:
   test:
     runs-on: "ubuntu-22.04"
-
+    outputs:
+      pr-number: ${{ steps.yaml-output.outputs.imageName }}
     steps:
       - uses: "actions/checkout@v2"
 
@@ -25,10 +26,10 @@ jobs:
         
       - name: Print Variables
         run: |
-          echo "Cluster_Name=${{ steps.yaml-output.outputs.imageName }}" >> $GITHUB_ENV
+          echo "Cluster_Name=${{ steps.yaml-output.outputs.imageName }}" >> $GITHUB_OUTPUT
   test1:
     needs: test
     uses: ./.github/workflows/buildVeracode.yml
     with:
-           repository: ${{ needs.test.env.Cluster_Name }}
+           repository: ${{ needs.test.outputs.pr-number }}
      

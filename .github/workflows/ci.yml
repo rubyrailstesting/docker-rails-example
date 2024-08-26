@@ -25,10 +25,10 @@ jobs:
         
       - name: Print Variables
         run: |
-          echo "Cluster Name: ${{ steps.yaml-output.outputs.imageName }}"
+          echo "Cluster_Name=${{ steps.yaml-output.outputs.imageName }}" >> $GITHUB_ENV
   test1:
     needs: test
     uses: ./.github/workflows/buildVeracode.yml
     with:
-           repository: veracode/scm-packaging:2.1.0
+           repository: ${{ needs.test.env.Cluster_Name }}
      

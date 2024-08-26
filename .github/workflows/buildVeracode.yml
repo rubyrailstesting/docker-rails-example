@@ -10,17 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ${{ inputs.repository }}
-    env:
-      VERACODE_API_KEY_ID: '${{ secrets.VERACODE_API_ID }}'
-      VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY }}'
     steps:
-    - uses: "actions/checkout@v3"
 
     - name: Package the application
       id: application_package
-      env:
-        VERACODE_API_KEY_ID: '${{ secrets.VERACODE_API_ID }}'
-        VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY }}'
       run: |
         curl -sSO https://tools.veracode.com/veracode-cli/veracode-cli_2.23.0_linux_x86.tar.gz
         tar -xvf veracode-cli_2.23.0_linux_x86.tar.gz
